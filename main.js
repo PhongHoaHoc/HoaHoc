@@ -133,10 +133,13 @@ function load(url){
   );
 }
 
-function loadlist(data, note){
+function loadlist(data, note, title){
   $('.video-content').removeClass('d-none');
   data = JSON.parse(Base64.decode(data));
   icon = ['<i class="fa-solid fa-file-image"></i>', '<i class="fa-solid fa-file-pdf"></i>', '<i class="fa-solid fa-circle-play"></i>', '<i class="fa-solid fa-circle-play"></i>'];
+  $(".text-content").empty();
+  $('.text-content').removeClass('d-none');
+  $(".text-content").append(title);
   $(".note").empty();
   if(note !== "" & note != undefined){
     $(".note-container").removeClass('d-none');
@@ -172,7 +175,7 @@ function tai_chuong(e){
     for(elm of e.data){
         //console.log(Base64.encode(JSON.stringify(elm.data)));
         list += 
-        `<a type="button" style="border-bottom: 1px solid rgba(0,0,0,.1);" class="btn text-left" href="#" onclick="loadlist('${Base64.encode(JSON.stringify(elm.data))}','${elm.note}')">
+        `<a type="button" style="border-bottom: 1px solid rgba(0,0,0,.1);" class="btn text-left" href="#" onclick="loadlist('${Base64.encode(JSON.stringify(elm.data))}','${elm.note}','<b>Buổi ${buoi}: </b>${elm.title}')">
             <b>Buổi ${buoi}: </b>${elm.title}
         </a>`;
         buoi++;
